@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzu.dao.RegionMapper">
+  <resultMap id="BaseResultMap" type="com.zzu.bean.Region">
+    <id column="RegionCode" jdbcType="CHAR" property="regioncode" />
+    <result column="Prv" jdbcType="VARCHAR" property="prv" />
+    <result column="Cty" jdbcType="VARCHAR" property="cty" />
+    <result column="Twn" jdbcType="VARCHAR" property="twn" />
+    <result column="Stage" jdbcType="INTEGER" property="stage" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    RegionCode, Prv, Cty, Twn, Stage
+  </sql>
+  <select id="selectByExample" parameterType="com.zzu.bean.RegionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from region
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from region
+    where RegionCode = #{regioncode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from region
+    where RegionCode = #{regioncode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zzu.bean.RegionExample">
+    delete from region
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zzu.bean.Region">
+    insert into region (RegionCode, Prv, Cty, 
+      Twn, Stage)
+    values (#{regioncode,jdbcType=CHAR}, #{prv,jdbcType=VARCHAR}, #{cty,jdbcType=VARCHAR}, 
+      #{twn,jdbcType=VARCHAR}, #{stage,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzu.bean.Region">
+    insert into region
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="regioncode != null">
+        RegionCode,
+      </if>
+      <if test="prv != null">
+        Prv,
+      </if>
+      <if test="cty != null">
+        Cty,
+      </if>
+      <if test="twn != null">
+        Twn,
+      </if>
+      <if test="stage != null">
+        Stage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="regioncode != null">
+        #{regioncode,jdbcType=CHAR},
+      </if>
+      <if test="prv != null">
+        #{prv,jdbcType=VARCHAR},
+      </if>
+      <if test="cty != null">
+        #{cty,jdbcType=VARCHAR},
+      </if>
+      <if test="twn != null">
+        #{twn,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null">
+        #{stage,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zzu.bean.RegionExample" resultType="java.lang.Long">
+    select count(*) from region
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update region
+    <set>
+      <if test="record.regioncode != null">
+        RegionCode = #{record.regioncode,jdbcType=CHAR},
+      </if>
+      <if test="record.prv != null">
+        Prv = #{record.prv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cty != null">
+        Cty = #{record.cty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.twn != null">
+        Twn = #{record.twn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stage != null">
+        Stage = #{record.stage,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update region
+    set RegionCode = #{record.regioncode,jdbcType=CHAR},
+      Prv = #{record.prv,jdbcType=VARCHAR},
+      Cty = #{record.cty,jdbcType=VARCHAR},
+      Twn = #{record.twn,jdbcType=VARCHAR},
+      Stage = #{record.stage,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzu.bean.Region">
+    update region
+    <set>
+      <if test="prv != null">
+        Prv = #{prv,jdbcType=VARCHAR},
+      </if>
+      <if test="cty != null">
+        Cty = #{cty,jdbcType=VARCHAR},
+      </if>
+      <if test="twn != null">
+        Twn = #{twn,jdbcType=VARCHAR},
+      </if>
+      <if test="stage != null">
+        Stage = #{stage,jdbcType=INTEGER},
+      </if>
+    </set>
+    where RegionCode = #{regioncode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzu.bean.Region">
+    update region
+    set Prv = #{prv,jdbcType=VARCHAR},
+      Cty = #{cty,jdbcType=VARCHAR},
+      Twn = #{twn,jdbcType=VARCHAR},
+      Stage = #{stage,jdbcType=INTEGER}
+    where RegionCode = #{regioncode,jdbcType=CHAR}
+  </update>
+</mapper>

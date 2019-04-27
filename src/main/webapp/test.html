@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>麦乐送</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+   <link href="./layui/css/templatemo_style.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery-3.3.1.js"></script>
+	<style>
+		ul.bg_yellow{
+			background: #ffc423;
+			margin-top: 2.5rem;
+		}
+		ul .layui-nav{
+			border-radius: 3px;
+			padding: 0 0;
+		}
+		ul.layui-nav-tree .layui-nav-itemed{
+			-webkit-box-shadow: 0 2px 1px #d69c00;
+			border-bottom: 1px solid #efaf00;
+			box-shadow: 0 2px 2px #d69c00;
+		}
+		ul.layui-nav-tree .layui-nav-item{
+			-webkit-box-shadow: 0 2px 1px #d69c00;
+			box-shadow: 0 2px 2px #d69c00;
+		}
+		.layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd{
+			border-bottom: 1px solid #ffd256;
+			border-bottom: 1px solid #efaf00;
+		}
+/* 			ul.bg_yellow:hover{
+			background-color: #ffc423;
+			
+			display: block; 
+		} */
+		ul.a:hover{
+			background: #d69c00;
+		}
+		.layui-nav-tree .amenu a{
+			color: #a25716;
+			
+			border-bottom: 1px solid #efaf00;
+		}
+		.layui-nav-tree .amenu a:hover{
+			color: #e71b23;
+		}
+		.layui-nav-tree .layui-nav-child a{
+			color: #a25716;
+		}
+		.layui-nav-tree .layui-nav-child a:hover{
+			color: #e71b23;
+		}
+		.layui-nav-itemed > .layui-nav-child{
+			background-color: #ffc423 !important;
+		}
+		.layui-nav-tree .layui-nav-bar{	/*左侧的条条*/
+			background-color: #FBFBFB;
+		}
+		.layui-nav-tree .layui-nav-item a:hover{ /*ul 鼠标移上去时的背景色*/
+			background: #ffc423;
+		}
+		ul.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this > a, .layui-nav-tree .layui-this > a:hover{
+			background-color: #ffc423;
+			color: #e71b23;
+		}
+	</style>
+	<style>
+		  .layui-nav .layui-this::after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed::after{
+			  background-color: #22C64E00;
+		  }
+		  .layui-nav .topbar .layui-nav-item a:hover, .layui-nav .layui-this a{
+			 color: #ffc423;
+		  }
+		  .layui-nav .layui-nav-item .ahome{
+			  background: #e81c25;
+		  }
+		  
+		  .layui-layout{
+			  margin: 1.875rem auto;
+			  min-width: 62.5rem;
+			  max-width: 75rem;
+		  }
+		  .layui-body1{
+			  left: 12.5rem;
+			  top: 9.375rem;
+			  right: 1.875rem;
+			  position: absolute;
+
+				bottom: 0;
+
+				z-index: 998;
+
+				width: auto;
+
+				box-sizing: border-box;
+		  }
+	  </style>
+	<style>
+		#my_menu-cards{width: 828px;height:1000px; background:#f1f1f1; margin: 0 auto;z-index: 99999;}
+		#menu_cell{height:290px;width:200px;background:white;float: left;margin: 10px;}
+		#menu_bottom{padding-top:12px; height:30px;width:200px;background-image: linear-gradient(#f3f3f3,#fff 15px,#fff);} 
+		#menu_name{height:30px;width:250px;font-size:20px; text-align:center;}
+		#menu_sp{font-size: 18px;color: green;}
+		#link{
+			display:block;
+			font-weight:bold;
+			color:#FFFFFF;
+			background-color:#e71b23;
+			border: none;
+			width:80px;
+			text-align:center;
+			padding:4px;
+			font-size:18px;
+			text-decoration:none;
+			float: right;
+		}
+
+	</style>
+		<script type="text/javascript">
+			window.onload=function (){
+				var data={"code":100,"msg":"处理成功","extend":{"dishes":[{"id":1,"name":"瓜丝儿","price":50,"kind":1,"discount":100,"state":1,"pic":"http://officialwebsitestorage.blob.core.chinacloudapi.cn/public/upload/photo_db/2019/04/01/201904011908114772/201904011908114772_640_480.jpg","description":"美味，新品上市"}
+				,{"id":2,"name":"什锦锅子","price":51,"kind":2,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900169.png","description":"美味，新品上市"}
+				,{"id":3,"name":"汤圆子锅","price":52,"kind":1,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900170.png?","description":"美味，新品上市"}
+				,{"id":4,"name":"菊花锅子","price":53,"kind":2,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900136.png?","description":"美味，新品上市"},
+				{"id":5,"name":"煮饽饽锅子","price":54,"kind":1,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900158.png?","description":"美味，新品上市"},
+				{"id":6,"name":"肉丁辣酱","price":55,"kind":2,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900161.png?","description":"美味，新品上市"},
+				{"id":7,"name":"炒肉丝儿","price":56,"kind":1,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900156.png?","description":"美味，新品上市"},
+				{"id":8,"name":"炒肉片","price":57,"kind":2,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900159.png?","description":"美味，新品上市"},
+				{"id":9,"name":"烩酸菜","price":58,"kind":1,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/503648.png?","description":"美味，新品上市"},
+				{"id":10,"name":"烩白菜","price":59,"kind":2,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900083.png?","description":"美味，新品上市"},
+				{"id":11,"name":"烩豌豆","price":60,"kind":1,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900085.png?","description":"美味，新品上市"},
+				{"id":12,"name":"焖扁豆","price":61,"kind":2,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900086.png?","description":"美味，新品上市"},
+				{"id":14,"name":"外加腌","price":62,"kind":1,"discount":100,"state":1,"pic":"https://www.4008-517-517.cn/cn/static/1555448019246/assets/86/products/900167.png?","description":"美味，新品上市"}]}}
+				var info=data.extend.dishes;
+				for(var i in info){
+					var $div1=$("<div id='menu_cell'></div>");
+					
+					var $div2=$("<div id='menu_image'></div>");
+					var $img=$("<img width='190' height='190'>");
+					$img.attr('src',info[i].pic);
+					$div2.append($img);
+					
+					var $div3=$("<div id='menu_name'>"+info[i].name+"</div>");
+					
+					var $div4=$("<div id='menu_bottom'></div>");
+					var $span=$("<span id='menu_sp'>￥"+info[i].price+"起</span>");
+					var $a=$("<input type='button' id='link' value='添 加' onclick='location.href='#''>");
+					$div4.append($span).append($a);
+					
+					$div1.append($div2).append($div3).append($div4);
+					$("#my_menu-cards").append($div1);
+				}
+				
+				
+			}
+		</script>
+</head>
+<body style="background: #F1F1F1;"><!-- class="layui-layout-body" -->
+<div class="layui-layout">
+  <div class="layui-header">
+
+	<div style="text-align: right;">
+	<span class="layui-breadcrumb" lay-separator="|">
+	  <a href="">登录</a>
+	  <a href="">追踪订单</a>
+	</span>
+	</div>
+	<div>
+	 <ul class="layui-nav layui-bg-black" style="padding: 0;border-radius: 0.625rem;" lay-filter="">
+	  <li class="layui-nav-item topbar"><a href="" class="ahome"><img src="img/mcdelivery_logo_zh.jpg" class=" "></a></li>
+	  <li class="layui-nav-item topbar layui-this"><a href=""><img src="img/hamburger.png" class="layui-nav-img">浏览菜单</a></li>
+	  <li class="layui-nav-item topbar"><a href=""><img src="img/hamburger.png" class="layui-nav-img">我的餐车</a></li>
+	  <li class="layui-nav-item topbar"><a href=""><img src="img/myAccount.png" class="layui-nav-img">我的账户</a></li>
+	  <li class="layui-nav-item topbar">
+		<a href="javascript:;"><img src="img/telephone.png" class="layui-nav-img">帮助</a>
+		<dl class="layui-nav-child"> <!-- 二级菜单 -->
+		  <dd><a href="">网站条款</a></dd>
+		  <dd><a href="">隐私政策</a></dd>
+		  <dd><a href="">订餐须知</a></dd>
+		  <dd><a href="">常见问题</a></dd>
+		  <dd><a href="">关于30分钟必达</a></dd>
+		  <dd><a href="">经营公示</a></dd>
+		  <dd><a href="">安全公示</a></dd>
+		</dl>
+	  </li>
+	</ul>
+	</div>	
+    
+      
+  </div>
+  
+	<ul class="layui-nav layui-nav-tree layui-inline bg_yellow"  lay-filter="demo">
+
+	  <li class="layui-nav-item layui-nav-itemed">
+		<span class="layui-nav-item layui-nav-itemed" style="color: #FFFFFF; box-shadow: 0 2px 2px #d69c00;">
+		<a href="javascript:;" >菜单</a>
+		</span>
+		<span class=" amenu" style="color: #FFFFFF; box-shadow: 0 2px 2px #d69c00;">
+		<a href="" style="color:">正餐菜单</a>
+		</span>
+		<dl class="layui-nav-child">
+		  <dd><a href="javascript:;">促销产品和热卖产品</a></dd>
+		  <dd><a href="javascript:;">主食和超值套餐</a></dd>
+		  <dd><a href="javascript:;">小食</a></dd>
+		  <dd><a href="javascript:;">甜品</a></dd>
+		  <dd><a href="javascript:;">饮品</a></dd>
+		  <dd><a href="javascript:;">开心乐园餐</a></dd>
+		  <dd><a href="">啦啦啦</a></dd>
+		</dl>
+	  </li>
+	</ul>
+  
+  <div class="layui-body1">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+		<div id="my_menu-cards"></div></div>
+  </div>
+  
+
+</div>
+
+	
+<div id="templatemo_footer_wrapper">
+	<div id="templatemo_footer">
+    	<div class="col one_fourth">
+        	<h4>浏览菜单</h4>
+            <ul class="footer_list">
+            	<li><a href="">促销产品和热卖产品</a></li>
+                <li><a href="">主食和超值套餐</a></li>
+                <li><a href="">小食</a></li>
+                <li><a href="">甜品</a></li>
+                <li><a href="">饮品</a></li>
+				<li><a href="">开心乐园餐</a></li>
+			</ul>   
+        </div>
+        
+        <div class="col one_fourth">
+        	<h4>帮助</h4>
+            <ul class="twitter_post">
+	            <li><a href="">网站条款</a></li>
+                <li><a href="">隐私政策</a></li>
+				<li><a href="">订餐须知</a></li>
+				<li><a href="">常见问题</a></li>
+				<li><a href="">关于三十分钟必达</a></li>
+				<li><a href="">经营公示</a></li>
+				<li><a href="">安全公示</a></li>			   
+			</ul>
+        </div>
+        <div class="col one_fourth no_margin_right">
+        	<h4>关注我们</h4>	
+            <div class="footer_social_button">
+                <a href="#"><img src="img/weiblog.png"/></a>
+                <a href="#"><img src="img/wechat.png" /></a>
+                <a href="#"><img src="img/qq.png"/></a>
+			</div>
+        
+            Copyright © 2048 <a href="#">软卓敏捷第六组</br></a>UI Designd By <a>前端小组</a>
+            
+        </div>
+        
+        <div class="cleaner"></div>
+    </div> <!-- END of footer -->
+</div> <!-- END of wrapper -->
+
+
+<script src="./layui/layui.js"></script>
+<script>
+//JavaScript代码区域
+layui.use('element', function(){
+  var element = layui.element;
+  
+});
+</script>
+
+	
+	
+</body>
+</html>

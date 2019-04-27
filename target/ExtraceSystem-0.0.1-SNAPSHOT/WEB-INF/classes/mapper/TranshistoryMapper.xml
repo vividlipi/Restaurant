@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzu.dao.TranshistoryMapper">
+  <resultMap id="BaseResultMap" type="com.zzu.bean.Transhistory">
+    <id column="SN" jdbcType="INTEGER" property="sn" />
+    <result column="PackageID" jdbcType="CHAR" property="packageid" />
+    <result column="ActTime" jdbcType="TIMESTAMP" property="acttime" />
+    <result column="UIDFrom" jdbcType="INTEGER" property="uidfrom" />
+    <result column="UIDTo" jdbcType="INTEGER" property="uidto" />
+    <result column="x" jdbcType="REAL" property="x" />
+    <result column="y" jdbcType="REAL" property="y" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SN, PackageID, ActTime, UIDFrom, UIDTo, x, y
+  </sql>
+  <select id="selectByExample" parameterType="com.zzu.bean.TranshistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from transhistory
+    where SN = #{sn,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from transhistory
+    where SN = #{sn,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zzu.bean.TranshistoryExample">
+    delete from transhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zzu.bean.Transhistory">
+    insert into transhistory (SN, PackageID, ActTime, 
+      UIDFrom, UIDTo, x, y
+      )
+    values (#{sn,jdbcType=INTEGER}, #{packageid,jdbcType=CHAR}, #{acttime,jdbcType=TIMESTAMP}, 
+      #{uidfrom,jdbcType=INTEGER}, #{uidto,jdbcType=INTEGER}, #{x,jdbcType=REAL}, #{y,jdbcType=REAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzu.bean.Transhistory">
+    insert into transhistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sn != null">
+        SN,
+      </if>
+      <if test="packageid != null">
+        PackageID,
+      </if>
+      <if test="acttime != null">
+        ActTime,
+      </if>
+      <if test="uidfrom != null">
+        UIDFrom,
+      </if>
+      <if test="uidto != null">
+        UIDTo,
+      </if>
+      <if test="x != null">
+        x,
+      </if>
+      <if test="y != null">
+        y,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sn != null">
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="packageid != null">
+        #{packageid,jdbcType=CHAR},
+      </if>
+      <if test="acttime != null">
+        #{acttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uidfrom != null">
+        #{uidfrom,jdbcType=INTEGER},
+      </if>
+      <if test="uidto != null">
+        #{uidto,jdbcType=INTEGER},
+      </if>
+      <if test="x != null">
+        #{x,jdbcType=REAL},
+      </if>
+      <if test="y != null">
+        #{y,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zzu.bean.TranshistoryExample" resultType="java.lang.Long">
+    select count(*) from transhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update transhistory
+    <set>
+      <if test="record.sn != null">
+        SN = #{record.sn,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageid != null">
+        PackageID = #{record.packageid,jdbcType=CHAR},
+      </if>
+      <if test="record.acttime != null">
+        ActTime = #{record.acttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uidfrom != null">
+        UIDFrom = #{record.uidfrom,jdbcType=INTEGER},
+      </if>
+      <if test="record.uidto != null">
+        UIDTo = #{record.uidto,jdbcType=INTEGER},
+      </if>
+      <if test="record.x != null">
+        x = #{record.x,jdbcType=REAL},
+      </if>
+      <if test="record.y != null">
+        y = #{record.y,jdbcType=REAL},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update transhistory
+    set SN = #{record.sn,jdbcType=INTEGER},
+      PackageID = #{record.packageid,jdbcType=CHAR},
+      ActTime = #{record.acttime,jdbcType=TIMESTAMP},
+      UIDFrom = #{record.uidfrom,jdbcType=INTEGER},
+      UIDTo = #{record.uidto,jdbcType=INTEGER},
+      x = #{record.x,jdbcType=REAL},
+      y = #{record.y,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzu.bean.Transhistory">
+    update transhistory
+    <set>
+      <if test="packageid != null">
+        PackageID = #{packageid,jdbcType=CHAR},
+      </if>
+      <if test="acttime != null">
+        ActTime = #{acttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uidfrom != null">
+        UIDFrom = #{uidfrom,jdbcType=INTEGER},
+      </if>
+      <if test="uidto != null">
+        UIDTo = #{uidto,jdbcType=INTEGER},
+      </if>
+      <if test="x != null">
+        x = #{x,jdbcType=REAL},
+      </if>
+      <if test="y != null">
+        y = #{y,jdbcType=REAL},
+      </if>
+    </set>
+    where SN = #{sn,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzu.bean.Transhistory">
+    update transhistory
+    set PackageID = #{packageid,jdbcType=CHAR},
+      ActTime = #{acttime,jdbcType=TIMESTAMP},
+      UIDFrom = #{uidfrom,jdbcType=INTEGER},
+      UIDTo = #{uidto,jdbcType=INTEGER},
+      x = #{x,jdbcType=REAL},
+      y = #{y,jdbcType=REAL}
+    where SN = #{sn,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzu.dao.ExpressSheetMapper">
+  <resultMap id="BaseResultMap" type="com.zzu.bean.ExpressSheet">
+    <id column="ID" jdbcType="CHAR" property="id" />
+    <result column="Type" jdbcType="INTEGER" property="type" />
+    <result column="Sender" jdbcType="INTEGER" property="sender" />
+    <result column="Recever" jdbcType="INTEGER" property="recever" />
+    <result column="Weight" jdbcType="REAL" property="weight" />
+    <result column="TranFee" jdbcType="REAL" property="tranfee" />
+    <result column="PackageFee" jdbcType="REAL" property="packagefee" />
+    <result column="InsuFee" jdbcType="REAL" property="insufee" />
+    <result column="Accepter" jdbcType="VARCHAR" property="accepter" />
+    <result column="Deliver" jdbcType="VARCHAR" property="deliver" />
+    <result column="AccepteTime" jdbcType="TIMESTAMP" property="acceptetime" />
+    <result column="DeliveTime" jdbcType="TIMESTAMP" property="delivetime" />
+    <result column="Acc1" jdbcType="VARCHAR" property="acc1" />
+    <result column="Acc2" jdbcType="VARCHAR" property="acc2" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, Type, Sender, Recever, Weight, TranFee, PackageFee, InsuFee, Accepter, Deliver, 
+    AccepteTime, DeliveTime, Acc1, Acc2, Status
+  </sql>
+  <select id="selectByExample" parameterType="com.zzu.bean.ExpressSheetExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from expresssheet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from expresssheet
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from expresssheet
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zzu.bean.ExpressSheetExample">
+    delete from expresssheet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zzu.bean.ExpressSheet">
+    insert into expresssheet (ID, Type, Sender, 
+      Recever, Weight, TranFee, 
+      PackageFee, InsuFee, Accepter, 
+      Deliver, AccepteTime, DeliveTime, 
+      Acc1, Acc2, Status)
+    values (#{id,jdbcType=CHAR}, #{type,jdbcType=INTEGER}, #{sender,jdbcType=INTEGER}, 
+      #{recever,jdbcType=INTEGER}, #{weight,jdbcType=REAL}, #{tranfee,jdbcType=REAL}, 
+      #{packagefee,jdbcType=REAL}, #{insufee,jdbcType=REAL}, #{accepter,jdbcType=VARCHAR}, 
+      #{deliver,jdbcType=VARCHAR}, #{acceptetime,jdbcType=TIMESTAMP}, #{delivetime,jdbcType=TIMESTAMP}, 
+      #{acc1,jdbcType=VARCHAR}, #{acc2,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzu.bean.ExpressSheet">
+    insert into expresssheet
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="sender != null">
+        Sender,
+      </if>
+      <if test="recever != null">
+        Recever,
+      </if>
+      <if test="weight != null">
+        Weight,
+      </if>
+      <if test="tranfee != null">
+        TranFee,
+      </if>
+      <if test="packagefee != null">
+        PackageFee,
+      </if>
+      <if test="insufee != null">
+        InsuFee,
+      </if>
+      <if test="accepter != null">
+        Accepter,
+      </if>
+      <if test="deliver != null">
+        Deliver,
+      </if>
+      <if test="acceptetime != null">
+        AccepteTime,
+      </if>
+      <if test="delivetime != null">
+        DeliveTime,
+      </if>
+      <if test="acc1 != null">
+        Acc1,
+      </if>
+      <if test="acc2 != null">
+        Acc2,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="sender != null">
+        #{sender,jdbcType=INTEGER},
+      </if>
+      <if test="recever != null">
+        #{recever,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="tranfee != null">
+        #{tranfee,jdbcType=REAL},
+      </if>
+      <if test="packagefee != null">
+        #{packagefee,jdbcType=REAL},
+      </if>
+      <if test="insufee != null">
+        #{insufee,jdbcType=REAL},
+      </if>
+      <if test="accepter != null">
+        #{accepter,jdbcType=VARCHAR},
+      </if>
+      <if test="deliver != null">
+        #{deliver,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptetime != null">
+        #{acceptetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delivetime != null">
+        #{delivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acc1 != null">
+        #{acc1,jdbcType=VARCHAR},
+      </if>
+      <if test="acc2 != null">
+        #{acc2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zzu.bean.ExpressSheetExample" resultType="java.lang.Long">
+    select count(*) from expresssheet
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update expresssheet
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.type != null">
+        Type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.sender != null">
+        Sender = #{record.sender,jdbcType=INTEGER},
+      </if>
+      <if test="record.recever != null">
+        Recever = #{record.recever,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null">
+        Weight = #{record.weight,jdbcType=REAL},
+      </if>
+      <if test="record.tranfee != null">
+        TranFee = #{record.tranfee,jdbcType=REAL},
+      </if>
+      <if test="record.packagefee != null">
+        PackageFee = #{record.packagefee,jdbcType=REAL},
+      </if>
+      <if test="record.insufee != null">
+        InsuFee = #{record.insufee,jdbcType=REAL},
+      </if>
+      <if test="record.accepter != null">
+        Accepter = #{record.accepter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deliver != null">
+        Deliver = #{record.deliver,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acceptetime != null">
+        AccepteTime = #{record.acceptetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.delivetime != null">
+        DeliveTime = #{record.delivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.acc1 != null">
+        Acc1 = #{record.acc1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acc2 != null">
+        Acc2 = #{record.acc2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update expresssheet
+    set ID = #{record.id,jdbcType=CHAR},
+      Type = #{record.type,jdbcType=INTEGER},
+      Sender = #{record.sender,jdbcType=INTEGER},
+      Recever = #{record.recever,jdbcType=INTEGER},
+      Weight = #{record.weight,jdbcType=REAL},
+      TranFee = #{record.tranfee,jdbcType=REAL},
+      PackageFee = #{record.packagefee,jdbcType=REAL},
+      InsuFee = #{record.insufee,jdbcType=REAL},
+      Accepter = #{record.accepter,jdbcType=VARCHAR},
+      Deliver = #{record.deliver,jdbcType=VARCHAR},
+      AccepteTime = #{record.acceptetime,jdbcType=TIMESTAMP},
+      DeliveTime = #{record.delivetime,jdbcType=TIMESTAMP},
+      Acc1 = #{record.acc1,jdbcType=VARCHAR},
+      Acc2 = #{record.acc2,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzu.bean.ExpressSheet">
+    update expresssheet
+    <set>
+      <if test="type != null">
+        Type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="sender != null">
+        Sender = #{sender,jdbcType=INTEGER},
+      </if>
+      <if test="recever != null">
+        Recever = #{recever,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null">
+        Weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="tranfee != null">
+        TranFee = #{tranfee,jdbcType=REAL},
+      </if>
+      <if test="packagefee != null">
+        PackageFee = #{packagefee,jdbcType=REAL},
+      </if>
+      <if test="insufee != null">
+        InsuFee = #{insufee,jdbcType=REAL},
+      </if>
+      <if test="accepter != null">
+        Accepter = #{accepter,jdbcType=VARCHAR},
+      </if>
+      <if test="deliver != null">
+        Deliver = #{deliver,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptetime != null">
+        AccepteTime = #{acceptetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delivetime != null">
+        DeliveTime = #{delivetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="acc1 != null">
+        Acc1 = #{acc1,jdbcType=VARCHAR},
+      </if>
+      <if test="acc2 != null">
+        Acc2 = #{acc2,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzu.bean.ExpressSheet">
+    update expresssheet
+    set Type = #{type,jdbcType=INTEGER},
+      Sender = #{sender,jdbcType=INTEGER},
+      Recever = #{recever,jdbcType=INTEGER},
+      Weight = #{weight,jdbcType=REAL},
+      TranFee = #{tranfee,jdbcType=REAL},
+      PackageFee = #{packagefee,jdbcType=REAL},
+      InsuFee = #{insufee,jdbcType=REAL},
+      Accepter = #{accepter,jdbcType=VARCHAR},
+      Deliver = #{deliver,jdbcType=VARCHAR},
+      AccepteTime = #{acceptetime,jdbcType=TIMESTAMP},
+      DeliveTime = #{delivetime,jdbcType=TIMESTAMP},
+      Acc1 = #{acc1,jdbcType=VARCHAR},
+      Acc2 = #{acc2,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

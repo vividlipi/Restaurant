@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzu.dao.UsersPackageMapper">
+  <resultMap id="BaseResultMap" type="com.zzu.bean.UsersPackage">
+    <id column="SN" jdbcType="INTEGER" property="sn" />
+    <result column="UserUID" jdbcType="INTEGER" property="useruid" />
+    <result column="PackageID" jdbcType="CHAR" property="packageid" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    SN, UserUID, PackageID
+  </sql>
+  <select id="selectByExample" parameterType="com.zzu.bean.UsersPackageExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from userspackage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userspackage
+    where SN = #{sn,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from userspackage
+    where SN = #{sn,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zzu.bean.UsersPackageExample">
+    delete from userspackage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zzu.bean.UsersPackage">
+    insert into userspackage (SN, UserUID, PackageID
+      )
+    values (#{sn,jdbcType=INTEGER}, #{useruid,jdbcType=INTEGER}, #{packageid,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zzu.bean.UsersPackage">
+    insert into userspackage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sn != null">
+        SN,
+      </if>
+      <if test="useruid != null">
+        UserUID,
+      </if>
+      <if test="packageid != null">
+        PackageID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sn != null">
+        #{sn,jdbcType=INTEGER},
+      </if>
+      <if test="useruid != null">
+        #{useruid,jdbcType=INTEGER},
+      </if>
+      <if test="packageid != null">
+        #{packageid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zzu.bean.UsersPackageExample" resultType="java.lang.Long">
+    select count(*) from userspackage
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update userspackage
+    <set>
+      <if test="record.sn != null">
+        SN = #{record.sn,jdbcType=INTEGER},
+      </if>
+      <if test="record.useruid != null">
+        UserUID = #{record.useruid,jdbcType=INTEGER},
+      </if>
+      <if test="record.packageid != null">
+        PackageID = #{record.packageid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update userspackage
+    set SN = #{record.sn,jdbcType=INTEGER},
+      UserUID = #{record.useruid,jdbcType=INTEGER},
+      PackageID = #{record.packageid,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zzu.bean.UsersPackage">
+    update userspackage
+    <set>
+      <if test="useruid != null">
+        UserUID = #{useruid,jdbcType=INTEGER},
+      </if>
+      <if test="packageid != null">
+        PackageID = #{packageid,jdbcType=CHAR},
+      </if>
+    </set>
+    where SN = #{sn,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zzu.bean.UsersPackage">
+    update userspackage
+    set UserUID = #{useruid,jdbcType=INTEGER},
+      PackageID = #{packageid,jdbcType=CHAR}
+    where SN = #{sn,jdbcType=INTEGER}
+  </update>
+</mapper>

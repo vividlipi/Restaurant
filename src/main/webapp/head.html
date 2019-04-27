@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>首页</title>
+  <link rel="stylesheet" href="./layui/css/layui.css">
+  <style>
+	  .layui-nav .layui-this::after, .layui-nav-bar, .layui-nav-tree .layui-nav-itemed::after{
+		  background-color: #22C64E00;
+	  }
+	  .layui-nav .layui-nav-item a:hover, .layui-nav .layui-this a{
+		  color: #ffc423;
+	  }
+	  .layui-nav .layui-nav-item .ahome{
+		  background: #e81c25;
+	  }
+  </style>
+</head>
+<body>
+
+<div style="text-align: right;">
+<span class="layui-breadcrumb" lay-separator="|">
+  <a href="">登录</a>
+  <a href="">追踪订单</a>
+</span>
+</div>
+<div>
+ <ul class="layui-nav layui-bg-cyan" lay-filter="">
+  <li class="layui-nav-item"><a href="" class="ahome"><img src="img/mcdelivery_logo_zh.jpg" class=" "></a></li>
+  <li class="layui-nav-item layui-this"><a href=""><img src="img/hamburger.png" class="layui-nav-img">浏览菜单</a></li>
+  <li class="layui-nav-item"><a href=""><img src="img/hamburger.png" class="layui-nav-img">优惠券</a></li>
+  <li class="layui-nav-item"><a href=""><img src="img/myAccount.png" class="layui-nav-img">我的账户</a></li>
+  <li class="layui-nav-item">
+    <a href="javascript:;"><img src="img/telephone.png" class="layui-nav-img">帮助</a>
+    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+      <dd><a href="">网站条款</a></dd>
+      <dd><a href="">隐私政策</a></dd>
+      <dd><a href="">订餐须知</a></dd>
+	  <dd><a href="">常见问题</a></dd>
+	  <dd><a href="">关于30分钟必达</a></dd>
+	  <dd><a href="">经营公示</a></dd>
+	  <dd><a href="">安全公示</a></dd>
+    </dl>
+  </li>
+</ul>
+</div>	
+<!-- 你的HTML代码 -->
+ 
+<script src="./layui/layui.js"></script>
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+layui.use('element', function(){
+  var element = layui.element;
+  
+  //…
+});
+</script>
+</body>
+</html>
