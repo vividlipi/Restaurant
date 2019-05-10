@@ -20,5 +20,5 @@
 	</bean>
 	<mvc:default-servlet-handler />
 	<mvc:annotation-driven></mvc:annotation-driven>
-	<mvc:view-controller path="myCar" view-name="myCar"/>
+	<mvc:view-controller path="/register" view-name="register"/>
 </beans>
