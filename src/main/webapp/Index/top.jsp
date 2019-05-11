@@ -43,7 +43,7 @@
 					
 						<li id="nav_menu"> <a href="${APP_PATH }/main.jsp">浏览菜单</a></li>
 						<li id="nav_mycar"><a href="${APP_PATH }/car" id="myCar">我的订单</a></li>
-						<li id="nav_account"><a href="#" >我的账户</a></li>
+						<li id="nav_account"><a href="/ExtraceSystem/myAccount.html" >我的账户</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-haspopup="true"
 							aria-expanded="false">帮助 <span class="caret"></span></a>
