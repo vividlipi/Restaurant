@@ -82,4 +82,11 @@ public class Dish {
     public void setDescription(String description) {
         this.description = description == null ? null : description.trim();
     }
+
+	@Override
+	public String toString() {
+		return "Dish [id=" + id + ", name=" + name + ", price=" + price + ", kind=" + kind + ", discount=" + discount
+				+ ", state=" + state + ", pic=" + pic + ", description=" + description + "]";
+	}
+    
 }

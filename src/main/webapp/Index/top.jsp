@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <%
@@ -16,53 +15,9 @@
 <script  src="${APP_PATH }/static/jquery.cookie.js"></script>
 <script
 	src="${APP_PATH }/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	<style type="text/css">
-	.breadcrumb a, a:link, a:visited {
-	    color: #3d3d3d;
-	    font-weight: normal;
-	    text-decoration: none;
-	}
 	
-	.breadcrumb a:hover{
-	    color: #ffc423;
-	    text-decoration: none;
-	}
-	.navbar {
-		border: none;
-		border-radius: 10px;
-	}
-	.container-fluid{
-	padding-right: 0px; 
-    padding-left: 0px;
-	}
-	.dropdown-menu .divider {
-		background-color:#00000000;
-		
-	}
-	.divider {
-	    margin-bottom: 8px;
-	    padding-bottom: 0px;
-	    border-bottom: 1px solid #ffc423;
-	}
-	</style>
 </head>
 <body>
-<% if(session.getAttribute("loginInfo")!=null){%>
-	<div id="top123">
-		<ol class="breadcrumb text-right" style="background-color:#00000000; margin-bottom: 0px;">
-			<li>欢迎登录，${sessionScope.loginInfo.name }</li>
-			<li><a href="${APP_PATH }/invalidate">注销</a></li>
-		</ol>
-	</div>
-	<%} else{%>
-	<div id="top123">
-		<ol class="breadcrumb text-right" style="background-color:#00000000; margin-bottom: 0px;">
-			<li><a href="${APP_PATH }/homePage.jsp">登录</a></li>
-			
-		</ol>
-	</div>
-	<%}
-	%>
 	<div class="row">
 		<nav class="navbar navbar-default  navbar-inverse">
 			<div class="container-fluid">
@@ -76,7 +31,7 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="${APP_PATH }/homePage.jsp" style="background: #e81c25"><img
+						<a class="navbar-brand" href="#"><img
 							style="margin-top: -12px;" alt="哈哈"
 							src="${APP_PATH }/static/images/logo.jpg"></a>
 					</div>
@@ -108,7 +63,6 @@
 								<li role="separator" class="divider"></li>
 								<li><a href="#">安全公示</a></li>
 							</ul></li>
-							
 					</ul>
 					<!-- 	<form class="navbar-form navbar-left">
 					<div class="form-group">
